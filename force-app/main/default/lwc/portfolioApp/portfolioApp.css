@@ -1,0 +1,40 @@
+:host {
+    display: block;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.portfolio {
+    width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #070b17;
+    color: #f8fafc;
+    font-family: Arial, sans-serif;
+}
+
+/* 
+  Increased scroll-margin-top to ensure the fixed navbar 
+  never covers the section headings when clicked or scrolled to.
+*/
+c-about,
+c-skills,
+c-projects,
+c-certifications,
+c-timeline,
+c-contact {
+    display: block;
+    scroll-margin-top: 120px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        scroll-behavior: auto !important;
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

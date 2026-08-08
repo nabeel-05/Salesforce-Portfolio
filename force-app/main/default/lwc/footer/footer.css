@@ -1,0 +1,30 @@
+:host {
+    display: block;
+}
+
+.footer {
+    width: 100%;
+
+    padding: 28px 16px;
+
+    text-align: center;
+
+    background: #070b17;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+    color: #64748b;
+
+    font-size: 12px;
+}
+
+.footer p {
+    margin: 0;
+}
+
+@media (max-width: 400px) {
+    .footer {
+        padding: 24px 12px;
+        font-size: 11px;
+    }
+}

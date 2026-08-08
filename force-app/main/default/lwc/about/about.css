@@ -1,0 +1,157 @@
+:host {
+    display: block;
+}
+
+.about {
+    width: 100%;
+
+    padding: 85px clamp(16px, 6vw, 70px);
+
+    background: #070b17;
+    color: #f8fafc;
+}
+
+.title {
+    margin: 0 0 45px;
+
+    text-align: center;
+
+    color: #f8fafc;
+
+    font-size: clamp(32px, 5vw, 46px);
+    line-height: 1.1;
+    font-weight: 800;
+}
+
+.about-card {
+    width: 100%;
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+
+    gap: 40px;
+
+    padding: 35px;
+
+    background: rgba(255, 255, 255, 0.04);
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 24px;
+
+    backdrop-filter: blur(16px);
+}
+
+.avatar-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar {
+    width: 175px;
+    aspect-ratio: 1;
+
+    display: grid;
+    place-items: center;
+
+    border-radius: 50%;
+
+    color: #fff;
+
+    font-size: 52px;
+    font-weight: 800;
+
+    background: linear-gradient(135deg, #3b82f6, #7c3aed);
+
+    box-shadow: 0 15px 45px rgba(59, 130, 246, 0.25);
+}
+
+.content {
+    min-width: 0;
+}
+
+.content h3 {
+    margin: 0 0 16px;
+
+    font-size: clamp(24px, 4vw, 32px);
+    line-height: 1.25;
+}
+
+.content p {
+    margin: 0 0 14px;
+
+    color: #94a3b8;
+
+    font-size: 15px;
+    line-height: 1.75;
+}
+
+.highlights {
+    margin-top: 22px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.item {
+    padding: 7px 12px;
+
+    border: 1px solid rgba(59, 130, 246, 0.2);
+    border-radius: 999px;
+
+    color: #cbd5e1;
+
+    background: rgba(59, 130, 246, 0.08);
+
+    font-size: 11px;
+
+    transition: 0.25s ease;
+}
+
+.item:hover {
+    transform: translateY(-2px);
+    background: rgba(59, 130, 246, 0.16);
+}
+
+@media (max-width: 700px) {
+    .about {
+        padding: 70px 16px;
+    }
+
+    .title {
+        margin-bottom: 30px;
+    }
+
+    .about-card {
+        grid-template-columns: 1fr;
+        gap: 24px;
+
+        padding: 25px 20px;
+
+        text-align: center;
+    }
+
+    .avatar {
+        width: 135px;
+        font-size: 42px;
+    }
+
+    .highlights {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 400px) {
+    .about-card {
+        padding: 22px 16px;
+    }
+
+    .item {
+        font-size: 10px;
+        padding: 6px 9px;
+    }
+}

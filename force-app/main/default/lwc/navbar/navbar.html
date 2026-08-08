@@ -1,0 +1,29 @@
+<template>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo" onclick={closeMenu}>
+                N<span class="dot">.</span>
+            </a>
+
+            <nav class={navLinksClass}>
+                <a href="#about" class={aboutClass} onclick={closeMenu}>About</a>
+                <a href="#skills" class={skillsClass} onclick={closeMenu}>Skills</a>
+                <a href="#projects" class={projectsClass} onclick={closeMenu}>Projects</a>
+                <a href="#experience" class={experienceClass} onclick={closeMenu}>Experience</a>
+                <a href="#contact" class={contactClass} onclick={closeMenu}>Contact</a>
+            </nav>
+
+            <div class="nav-actions">
+                <a href="cv.pdf" target="_blank" class="resume-btn" rel="noopener noreferrer">
+                    Resume
+                </a>
+
+                <button class={hamburgerClass} onclick={toggleMenu} aria-label="Toggle navigation menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+</template>
