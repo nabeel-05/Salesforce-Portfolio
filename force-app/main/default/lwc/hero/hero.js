@@ -2,10 +2,10 @@ import { LightningElement, track } from 'lwc';
 
 export default class Hero extends LightningElement {
     roles = [
-        'Salesforce Developer',
-        'AI Builder',
-        'LWC Engineer',
-        'Automation Developer'
+        'Salesforce Admin & Developer Intern',
+        'LWC & Apex Specialist',
+        'Agentforce & AI Builder',
+        'CRM Automation Specialist'
     ];
 
     @track currentRole = '';

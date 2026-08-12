@@ -27,10 +27,11 @@ export default class PortfolioApp extends LightningElement {
             } else if (targetId === '#certifications') {
                 componentSelector = 'c-certifications';
             } else if (targetId === '#experience') {
-                // Dynamically support whichever component tag name exists for experience
-                componentSelector = this.template.querySelector('c-experience') ? 'c-experience' : 'c-timeline';
+                componentSelector = 'c-timeline';
             } else if (targetId === '#contact') {
                 componentSelector = 'c-contact';
+            } else if (targetId === '#home') {
+                componentSelector = 'c-hero';
             }
 
             const targetComponent = this.template.querySelector(componentSelector);
@@ -51,9 +52,8 @@ export default class PortfolioApp extends LightningElement {
     }
 
     setupSectionObserver() {
-        // Query all possible section tags, covering both c-experience and c-timeline variations
         const sections = this.template.querySelectorAll(
-            'c-about, c-skills, c-projects, c-certifications, c-timeline, c-experience, c-contact'
+            'c-about, c-skills, c-projects, c-certifications, c-timeline, c-contact'
         );
 
         if (!sections.length) {
@@ -66,8 +66,7 @@ export default class PortfolioApp extends LightningElement {
                     if (entry.isIntersecting) {
                         let id = entry.target.localName.replace('c-', '');
                         
-                        // Map both variants back to 'experience' for navbar matching
-                        if (id === 'timeline' || id === 'experience') {
+                        if (id === 'timeline') {
                             id = 'experience';
                         }
 

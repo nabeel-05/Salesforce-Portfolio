@@ -160,7 +160,7 @@ h2 {
 }
 
 /* Social Links */
-/* .socials {
+.socials {
     display: flex;
     gap: 20px;
     justify-content: center;
@@ -176,7 +176,7 @@ h2 {
 
 .socials a:hover {
     color: #60a5fa;
-} */
+}
 
 /* Scroll Indicator */
 .scroll-indicator {

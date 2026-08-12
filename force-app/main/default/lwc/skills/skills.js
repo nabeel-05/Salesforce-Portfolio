@@ -4,7 +4,7 @@ export default class Skills extends LightningElement {
     skills = [
         {
             name: 'Salesforce Development',
-            icon: '☁️',
+            // icon: '☁️',
             description: 'Building scalable backend logic, queries, and reactive user interfaces on the platform.',
             tools: [
                 'Apex (Triggers, Batch, Queueable)',
@@ -15,7 +15,7 @@ export default class Skills extends LightningElement {
         },
         {
             name: 'Declarative & Security',
-            icon: '🔐',
+            // icon: '🔐',
             description: 'Designing low-code automated workflows and secure, role-based data architectures.',
             tools: [
                 'Flow Builder',
@@ -29,7 +29,7 @@ export default class Skills extends LightningElement {
         },
         {
             name: 'Integrations & Portals',
-            icon: '🔗',
+            // icon: '🔗',
             description: 'Connecting external systems via APIs and creating public-facing Experience Cloud portals.',
             tools: [
                 'REST/SOAP Integration',
@@ -40,7 +40,7 @@ export default class Skills extends LightningElement {
         },
         {
             name: 'AI & Methodologies',
-            icon: '🤖',
+            // icon: '🤖',
             description: 'Implementing autonomous AI solutions, trust layers, and structured engineering practices.',
             tools: [
                 'Agentforce',
@@ -52,7 +52,7 @@ export default class Skills extends LightningElement {
         },
         {
             name: 'Programming & Core CS',
-            icon: '💻',
+            // icon: '💻',
             description: 'Strong foundation in multi-paradigm software development, web standards, and computer science.',
             tools: [
                 'Python',
@@ -65,7 +65,7 @@ export default class Skills extends LightningElement {
         },
         {
             name: 'Platform Tools & DevOps',
-            icon: '🛠️',
+            // icon: '🛠️',
             description: 'Using modern version control, source-driven development pipelines, and IDEs.',
             tools: [
                 'Git',

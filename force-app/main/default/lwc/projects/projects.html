@@ -1,79 +1,46 @@
 <template>
     <c-scroll-reveal>
-
         <section class="projects" id="projects">
-
             <div class="section-heading">
-
-                <span class="eyebrow">
-                    WHAT I'VE BUILT
-                </span>
-
+                <span class="eyebrow">WHAT I'VE BUILT</span>
                 <h2 class="title">
                     Featured <span>Projects</span>
                 </h2>
-
             </div>
 
-
             <div class="grid">
-
                 <template for:each={projects} for:item="project">
-
                     <article class="card" key={project.id}>
-
                         <div class="tag">
                             {project.category}
                         </div>
 
+                        <h3>{project.title}</h3>
 
-                        <h3>
-                            {project.title}
-                        </h3>
-
-
-                        <p>
-                            {project.description}
-                        </p>
-
+                        <p>{project.description}</p>
 
                         <div class="tech">
-
                             <template for:each={project.technologies} for:item="tech">
-
-                                <span key={tech}>
-                                    {tech}
-                                </span>
-
+                                <span key={tech}>{tech}</span>
                             </template>
-
                         </div>
-
 
                         <div class="buttons">
                             <template if:true={project.github}>
-                                <!-- Added descriptive aria-label -->
-                                <a href={project.github} target="_blank" rel="noopener noreferrer"
-                                    aria-label="View GitHub repository for {project.title}">
-                                    GitHub
+                                <a href={project.github} target="_blank" rel="noopener noreferrer" class="btn-github">
+                                    GitHub Repo
                                 </a>
                             </template>
 
                             <template if:true={project.demo}>
-                                <!-- Added descriptive aria-label -->
-                                <a href={project.demo} target="_blank" rel="noopener noreferrer"
-                                    aria-label="View live demo for {project.title}">
+                                <a href={project.demo} target="_blank" rel="noopener noreferrer" class="btn-demo">
                                     Live Demo
                                 </a>
                             </template>
                         </div>
-
                     </article>
-
                 </template>
-
             </div>
-
         </section>
     </c-scroll-reveal>
 </template>

@@ -1,10 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
 :host {
     display: block;
 }
 
 .skills {
     width: 100%;
-    /* Generous top padding to clear navbar, and 150px bottom padding so bottom cards never get cut off */
     padding: 160px clamp(16px, 6vw, 70px) 150px;
     background: #070b17;
     color: #f8fafc;
@@ -23,7 +26,6 @@
     max-width: 1100px;
     margin: auto;
     display: grid;
-    /* Max 3 items per row on desktop */
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 18px;
 }
@@ -44,10 +46,10 @@
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
 }
 
-.icon {
+/* .icon {
     margin-bottom: 12px;
     font-size: 30px;
-}
+} */
 
 .skill-card h3 {
     margin: 0 0 10px;
@@ -78,14 +80,12 @@
     line-height: 1.2;
 }
 
-/* Medium Screens / Tablets: Drops to 2 items per row */
 @media (max-width: 1000px) {
     .skills-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
     }
 }
 
-/* Mobile Screens: Drops to 1 item per row (min 1) */
 @media (max-width: 600px) {
     .skills {
         padding-top: 140px;

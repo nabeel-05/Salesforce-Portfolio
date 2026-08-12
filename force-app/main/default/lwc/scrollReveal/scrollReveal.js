@@ -10,9 +10,8 @@ export default class ScrollReveal extends LightningElement {
             return;
         }
 
-        // Automatically assign staggered delays to grid items for a fluid wave effect
         revealElements.forEach((el, index) => {
-            const delay = (index % 4) * 0.12; // Cascading delay per item in a row
+            const delay = (index % 4) * 0.12;
             el.style.transitionDelay = `${delay}s`;
         });
 

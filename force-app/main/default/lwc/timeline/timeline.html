@@ -1,30 +1,16 @@
 <template>
-
     <c-scroll-reveal>
-
         <section class="timeline-section" id="experience">
-
-
-
             <h2 class="title">
-                Experience
+                Experience & Certifications
             </h2>
 
-
             <div class="timeline">
-
-
                 <template for:each={items} for:item="item">
-
-
                     <div class="timeline-item" key={item.id}>
-
-
                         <div class="dot"></div>
 
-
                         <div class="card">
-                            <!-- Added aria-hidden to prevent screen readers from reading emojis -->
                             <div class="icon" aria-hidden="true">
                                 {item.icon}
                             </div>
@@ -36,22 +22,22 @@
                             <span class="date">
                                 {item.date}
                             </span>
-                            <!-- ... rest of your template ... -->
+
+                            <p>
+                                {item.description}
+                            </p>
+
+                            <div class="tags">
+                                <template for:each={item.skills} for:item="skill">
+                                    <span key={skill}>
+                                        {skill}
+                                    </span>
+                                </template>
+                            </div>
                         </div>
-
-
                     </div>
-
-
                 </template>
-
-
             </div>
-
-
         </section>
-
     </c-scroll-reveal>
-
-
 </template>

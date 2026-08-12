@@ -88,7 +88,7 @@
     padding: 8px 18px;
     border-radius: 999px;
     background: linear-gradient(135deg, #3b82f6, #7c3aed);
-    color: #ffffff !important; /* Forced white text */
+    color: #ffffff !important;
     font-size: 13px;
     font-weight: 600;
     text-decoration: none;
