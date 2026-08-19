@@ -1,77 +1,105 @@
 import { LightningElement } from 'lwc';
 
 export default class Skills extends LightningElement {
+
     skills = [
         {
-            name: 'Salesforce Development',
-            // icon: '☁️',
-            description: 'Building scalable backend logic, queries, and reactive user interfaces on the platform.',
+            name: 'Programming Languages',
+            description: 'Building software solutions across general-purpose and web programming environments.',
             tools: [
-                'Apex (Triggers, Batch, Queueable)',
-                'LWC',
-                'SOQL/SOSL',
-                'Async Apex'
+                'Java',
+                'Python',
+                'JavaScript (ES6+)'
             ]
         },
+
         {
-            name: 'Declarative & Security',
-            // icon: '🔐',
-            description: 'Designing low-code automated workflows and secure, role-based data architectures.',
+            name: 'Frontend Technologies',
+            description: 'Developing responsive, component-based user interfaces using modern web technologies and Salesforce UI frameworks.',
             tools: [
-                'Flow Builder',
+                'React',
+                'HTML5',
+                'CSS3',
+                'Lightning Web Components (LWC)',
+                'Salesforce Lightning Design System (SLDS)'
+            ]
+        },
+
+        {
+            name: 'Salesforce Development',
+            description: 'Building scalable Salesforce solutions with custom backend logic, data querying, and asynchronous processing.',
+            tools: [
+                'Apex',
+                'Triggers',
+                'SOQL',
+                'SOSL',
+                'Batch Apex',
+                'Queueable Apex',
+                'Asynchronous Apex'
+            ]
+        },
+
+        {
+            name: 'Salesforce Configuration',
+            description: 'Designing configurable Salesforce solutions using declarative automation, data modeling, and platform configuration.',
+            tools: [
+                'Custom Objects',
+                'Object Relationships',
                 'Validation Rules',
                 'Approval Processes',
+                'Flow Builder',
+                'Custom Metadata Types'
+            ]
+        },
+
+        {
+            name: 'Security & Access Control',
+            description: 'Implementing secure Salesforce architectures with granular data access and permission management.',
+            tools: [
                 'Profiles',
                 'Permission Sets',
-                'OWD',
-                'Sharing Rules'
+                'Organization-Wide Defaults (OWD)',
+                'Role Hierarchy',
+                'Sharing Rules',
+                'CRUD/FLS'
             ]
         },
+
         {
-            name: 'Integrations & Portals',
-            // icon: '🔗',
-            description: 'Connecting external systems via APIs and creating public-facing Experience Cloud portals.',
+            name: 'Integrations',
+            description: 'Connecting Salesforce with external systems through secure APIs, authentication, and platform integration features.',
             tools: [
-                'REST/SOAP Integration',
-                'Experience Cloud',
-                'Data Loader',
-                'Postman'
+                'REST APIs',
+                'SOAP APIs',
+                'OAuth 2.0',
+                'Named Credentials',
+                'External Credentials',
+                'Google Calendar API'
             ]
         },
+
         {
-            name: 'AI & Methodologies',
-            // icon: '🤖',
-            description: 'Implementing autonomous AI solutions, trust layers, and structured engineering practices.',
+            name: 'Tools & Platforms',
+            description: 'Using modern Salesforce development, version control, API testing, data management, and deployment tools.',
             tools: [
-                'Agentforce',
-                'Einstein Trust Layer',
-                'Prompt Engineering',
-                'Agile/Scrum',
-                'Software Engineering Principles'
-            ]
-        },
-        {
-            name: 'Programming & Core CS',
-            // icon: '💻',
-            description: 'Strong foundation in multi-paradigm software development, web standards, and computer science.',
-            tools: [
-                'Python',
-                'C',
-                'C++',
-                'JavaScript (ES6+)',
-                'HTML5/CSS3',
-                'OOPs'
-            ]
-        },
-        {
-            name: 'Platform Tools & DevOps',
-            // icon: '🛠️',
-            description: 'Using modern version control, source-driven development pipelines, and IDEs.',
-            tools: [
+                'Salesforce DX (SFDX)',
                 'Git',
                 'GitHub',
-                'Salesforce DX (SFDX)',
-                'VS Code'
+                'VS Code',
+                'Postman',
+                'Data Loader',
+                'Experience Cloud'
+            ]
+        },
+
+        {
+            name: 'AI & Automation',
+            description: 'Building AI-powered Salesforce experiences and intelligent automation with trusted generative AI capabilities.',
+            tools: [
+                'Agentforce',
+                'Einstein Activity Capture',
+                'Einstein Trust Layer',
+                'Prompt Engineering'
             ]
         }
     ];

@@ -1,8 +1,8 @@
 <template>
-    <c-navbar></c-navbar>
+    <c-navbar onnavigate={handleNavigation}></c-navbar>
 
     <main class="portfolio">
-        <c-hero></c-hero>
+        <c-hero onnavigate={handleNavigation}></c-hero>
         <c-about></c-about>
         <c-skills></c-skills>
         <c-projects></c-projects>

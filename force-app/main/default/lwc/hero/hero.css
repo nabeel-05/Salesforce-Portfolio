@@ -124,7 +124,7 @@ h2 {
     margin-bottom: 35px;
 }
 
-.buttons a {
+.buttons button {
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -136,27 +136,32 @@ h2 {
     transition: 0.3s ease;
 }
 
-.buttons a.primary {
-    color: #fff;
-    background: linear-gradient(135deg, #3b82f6, #7c3aed);
-    box-shadow: 0 10px 25px rgba(59, 130, 246, 0.3);
+.buttons button.primary {
+    color: #ffffff;
+    background: linear-gradient(135deg, #3b82f6 0%, #7c3aed 100%);
+    border: none;
+    box-shadow: 0 8px 22px rgba(59, 130, 246, 0.25);
 }
 
-.buttons a.primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 15px 30px rgba(59, 130, 246, 0.4);
+.buttons button.primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 28px rgba(59, 130, 246, 0.35);
 }
 
-.buttons a.secondary {
+/* Let's Connect */
+
+.buttons button.secondary {
     color: #f8fafc;
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(148, 163, 184, 0.25);
+    box-shadow: 0 8px 22px rgba(110, 110, 110, 0.25);
 }
 
-.buttons a.secondary:hover {
-    background: rgba(255, 255, 255, 0.1);
-    transform: translateY(-3px);
-    border-color: rgba(59, 130, 246, 0.4);
+.buttons button.secondary:hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(148, 163, 184, 0.4);
+    box-shadow: 0 12px 28px rgba(110, 110, 110, 0.25);
 }
 
 /* Social Links */

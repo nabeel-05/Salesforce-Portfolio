@@ -2,7 +2,7 @@ import { LightningElement, track } from 'lwc';
 
 export default class Hero extends LightningElement {
     roles = [
-        'Salesforce Admin & Developer Intern',
+        'Salesforce Admin & Developer',
         'LWC & Apex Specialist',
         'Agentforce & AI Builder',
         'CRM Automation Specialist'
@@ -52,4 +52,17 @@ export default class Hero extends LightningElement {
     disconnectedCallback() {
         clearInterval(this.interval);
     }
+    handleNavigation(event) {
+    const section = event.currentTarget.dataset.section;
+
+    this.dispatchEvent(
+        new CustomEvent('navigate', {
+            detail: {
+                section
+            },
+            bubbles: true,
+            composed: true
+        })
+    );
+}
 }

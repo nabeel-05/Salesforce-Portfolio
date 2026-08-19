@@ -6,15 +6,33 @@
             </a>
 
             <nav class={navLinksClass}>
-                <a href="#about" class={aboutClass} onclick={closeMenu}>About</a>
-                <a href="#skills" class={skillsClass} onclick={closeMenu}>Skills</a>
-                <a href="#projects" class={projectsClass} onclick={closeMenu}>Projects</a>
-                <a href="#experience" class={experienceClass} onclick={closeMenu}>Experience</a>
-                <a href="#contact" class={contactClass} onclick={closeMenu}>Contact</a>
+                <button class={aboutClass} type="button" data-section="about" onclick={handleNavigation}>
+                    About
+                </button>
+
+                <button class={skillsClass} type="button" data-section="skills" onclick={handleNavigation}>
+                    Skills
+                </button>
+
+                <button class={projectsClass} type="button" data-section="projects" onclick={handleNavigation}>
+                    Projects
+                </button>
+                <button class={certificationsClass} type="button" data-section="certifications"
+                    onclick={handleNavigation}>
+                    Certifications
+                </button>
+
+                <button class={experienceClass} type="button" data-section="experience" onclick={handleNavigation}>
+                    Experience
+                </button>
+
+                <button class={contactClass} type="button" data-section="contact" onclick={handleNavigation}>
+                    Contact
+                </button>
             </nav>
 
             <div class="nav-actions">
-                <a href="mohammad_nabeel.pdf" target="_blank" class="resume-btn" rel="noopener noreferrer">
+                <a href="" target="_blank" class="resume-btn" rel="noopener noreferrer">
                     Resume
                 </a>
 

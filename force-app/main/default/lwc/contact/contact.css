@@ -84,9 +84,10 @@
 .contact-container {
     width: 100%;
     max-width: 1100px;
-    margin: auto;
+    margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    justify-content: center;
     gap: 16px;
 }
 
@@ -152,20 +153,16 @@
 .contact-card a {
     display: block;
     width: 100%;
+    max-width: 100%;
     color: #94a3b8;
     text-decoration: none;
-    font-size: 13px;
+    font-size: clamp(11px, 1.1vw, 13px);
     line-height: 1.4;
     transition: color 0.25s ease;
-    white-space: normal;
-    word-wrap: break-word; 
-    overflow-wrap: break-word;
-    word-break: break-word;
-}
 
-.contact-card a .email-domain {
-    display: block;
-    font-weight: 500;
+    /* Allows long email addresses to wrap at any width */
+    overflow-wrap: anywhere;
+    word-break: break-word;
 }
 
 .contact-card a:hover {

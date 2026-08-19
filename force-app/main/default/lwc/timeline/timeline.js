@@ -27,29 +27,36 @@ export default class Timeline extends LightningElement {
         //     ]
         // },
         {
-            id: 1,
-            // icon: '🚀',
-            title: 'Salesforce Admin & Developer Intern at Cloud IgnitEd',
-            date: 'Salesforce Project',
-            description: 'Engineered custom LWC/Apex applications, REST API ERP integrations, and Flow automations, driving a 25% boost in operational efficiency and a 30% reduction in post-release issues.',
-            skills: [
-                'Experience Cloud',
-                'LWC',
-                'Apex'
-            ]
-        },
-        {
-            id: 2,
-            // icon: '🚀',
-            title: 'Salesforce Admin & Developer Trainee at Cloud IgnitEd',
-            date: 'Feb 2026 - Jul 2026',
-            description: 'Mastered full-stack Salesforce development and security architecture, building interactive LWCs, governor-limit-compliant Async Apex backends, and autonomous Agentforce AI workflows.',
-            skills: [
-                'Experience Cloud',
-                'LWC',
-                'Apex'
-            ]
-        },
+    id: 1,
+    // icon: '🚀',
+    title: 'Salesforce Admin & Developer at Cloud IgnitEd - Internship',
+    date: 'Apr 2026 - Present',
+    description: 'Developing secure Salesforce solutions using LWC, Web-to-Lead, ReCaptchaV2, Flow, Agentforce, and Einstein Activity Capture for application processing, AI-powered insights, and activity synchronization.',
+    skills: [
+        'LWC',
+        'Web-to-Lead',
+        'ReCaptchaV2',
+        'Flow',
+        'Agentforce',
+        'Einstein Activity Capture'
+    ]
+},
+
+{
+    id: 2,
+    // icon: '🚀',
+    title: 'Salesforce Admin & Developer at Cloud IgnitEd - Training',
+    date: 'Jan 2026 - Mar 2026',
+    description: 'Built interactive LWC interfaces and optimized Apex backend logic while designing scalable data models, implementing Salesforce security controls, automating workflows with Flow, and configuring Agentforce AI workflows.',
+    skills: [
+        'LWC',
+        'Apex',
+        'SOQL',
+        'Async Apex',
+        'Salesforce Flow',
+        'Agentforce'
+    ]
+},
         // {
         //     id: 4,
         //     // icon: '🤖',

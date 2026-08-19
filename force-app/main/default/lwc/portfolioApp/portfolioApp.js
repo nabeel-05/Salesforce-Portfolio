@@ -3,46 +3,7 @@ import { LightningElement } from 'lwc';
 export default class PortfolioApp extends LightningElement {
     observer;
 
-    connectedCallback() {
-        this.template.addEventListener('click', event => {
-            const link = event.target.closest('a[href^="#"]');
-            if (!link) {
-                return;
-            }
-
-            const targetId = link.getAttribute('href');
-            if (!targetId || targetId === '#') {
-                return;
-            }
-
-            event.preventDefault();
-
-            let componentSelector = '';
-            if (targetId === '#about') {
-                componentSelector = 'c-about';
-            } else if (targetId === '#skills') {
-                componentSelector = 'c-skills';
-            } else if (targetId === '#projects') {
-                componentSelector = 'c-projects';
-            } else if (targetId === '#certifications') {
-                componentSelector = 'c-certifications';
-            } else if (targetId === '#experience') {
-                componentSelector = 'c-timeline';
-            } else if (targetId === '#contact') {
-                componentSelector = 'c-contact';
-            } else if (targetId === '#home') {
-                componentSelector = 'c-hero';
-            }
-
-            const targetComponent = this.template.querySelector(componentSelector);
-            if (targetComponent) {
-                targetComponent.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
-            }
-        });
-    }
+    
 
     renderedCallback() {
         if (this.observer) {
@@ -93,4 +54,29 @@ export default class PortfolioApp extends LightningElement {
             this.observer.disconnect();
         }
     }
+    handleNavigation(event) {
+    const sectionMap = {
+        about: 'c-about',
+        skills: 'c-skills',
+        projects: 'c-projects',
+        certifications: 'c-certifications',
+        experience: 'c-timeline',
+        contact: 'c-contact'
+    };
+
+    const targetSelector = sectionMap[event.detail.section];
+
+    if (!targetSelector) {
+        return;
+    }
+
+    const targetComponent = this.template.querySelector(targetSelector);
+
+    if (targetComponent) {
+        targetComponent.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    }
+}
 }

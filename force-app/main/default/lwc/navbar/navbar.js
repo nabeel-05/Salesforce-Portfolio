@@ -26,22 +26,40 @@ export default class Navbar extends LightningElement {
     }
 
     get aboutClass() {
-        return this.activeSection === 'about' ? 'active' : '';
-    }
+    return this.activeSection === 'about' ? 'nav-link active' : 'nav-link';
+}
 
-    get skillsClass() {
-        return this.activeSection === 'skills' ? 'active' : '';
-    }
+get skillsClass() {
+    return this.activeSection === 'skills' ? 'nav-link active' : 'nav-link';
+}
 
-    get projectsClass() {
-        return this.activeSection === 'projects' ? 'active' : '';
-    }
+get projectsClass() {
+    return this.activeSection === 'projects' ? 'nav-link active' : 'nav-link';
+}
 
-    get experienceClass() {
-        return this.activeSection === 'experience' ? 'active' : '';
-    }
+get experienceClass() {
+    return this.activeSection === 'experience' ? 'nav-link active' : 'nav-link';
+}
 
-    get contactClass() {
-        return this.activeSection === 'contact' ? 'active' : '';
-    }
+get contactClass() {
+    return this.activeSection === 'contact' ? 'nav-link active' : 'nav-link';
+}
+get certificationsClass() {
+    return this.activeSection === 'certifications' ? 'active' : '';
+}
+    handleNavigation(event) {
+    this.closeMenu();
+
+    const section = event.currentTarget.dataset.section;
+
+    this.dispatchEvent(
+        new CustomEvent('navigate', {
+            detail: { section },
+            bubbles: true,
+            composed: true
+        })
+    );
+
+}
+
 }
