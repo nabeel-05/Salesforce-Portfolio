@@ -1,8 +1,6 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getContent } from 'experience/cmsDeliveryApi';
 import siteId from '@salesforce/site/Id';
-import getResumeBase64 from '@salesforce/apex/ResumePdfController.getResumeBase64';
-import PDFJS_VIEWER_BASE from '@salesforce/resourceUrl/pdfjsViewer';
 
 export default class Navbar extends LightningElement {
     menuOpen = false;
@@ -13,17 +11,6 @@ export default class Navbar extends LightningElement {
 
     showResumeModal = false;
     isLoadingPdf = false;
-    pdfError = false;
-    documentBase64;
-    viewerReady = false;
-
-    get pdfViewerUrl() {
-        return `${PDFJS_VIEWER_BASE}/web/viewer.html`;
-    }
-
-    connectedCallback() {
-        window.addEventListener('message', this.handlePdfViewerMessage);
-    }
 
     @wire(getContent, {
         channelOrSiteId: siteId,
@@ -43,9 +30,16 @@ export default class Navbar extends LightningElement {
         const cmsUrl = media.url;
 
         if (cmsUrl) {
-            this.rawResumeUrl = cmsUrl.startsWith('http')
+            const normalizedCmsUrl = cmsUrl.includes('/sfsites/c/')
                 ? cmsUrl
-                : `${window.location.origin}${cmsUrl}`;
+                : cmsUrl.replace(
+                    '/cms/delivery/media/',
+                    '/sfsites/c/cms/delivery/media/'
+                );
+
+            this.rawResumeUrl = normalizedCmsUrl.startsWith('http')
+                ? normalizedCmsUrl
+                : `${window.location.origin}${normalizedCmsUrl}`;
         }
 
         const title = media.title || media.name;
@@ -149,7 +143,7 @@ export default class Navbar extends LightningElement {
         );
     }
 
-    async openResume(event) {
+    openResume(event) {
         event?.preventDefault();
 
         if (!this.rawResumeUrl) {
@@ -157,118 +151,14 @@ export default class Navbar extends LightningElement {
         }
 
         this.closeMenu();
-
         this.showResumeModal = true;
         this.isLoadingPdf = true;
-        this.pdfError = false;
-        this.viewerReady = false;
 
         window.addEventListener('keydown', this.handleEscape);
-
-        if (this.documentBase64) {
-            // Data already fetched from a previous open — wait for the
-            // freshly-rendered iframe's ready message to deliver it.
-            return;
-        }
-
-        try {
-            this.documentBase64 = await getResumeBase64({
-                resumeUrl: this.rawResumeUrl
-            });
-
-            if (!this.documentBase64) {
-                throw new Error('Resume PDF data was empty.');
-            }
-
-            this.tryDeliverPdf();
-        } catch (error) {
-            console.error(
-                'Resume load failed:',
-                error?.body?.message || error?.message || error
-            );
-            this.isLoadingPdf = false;
-            this.pdfError = true;
-        }
     }
 
-    handlePdfViewerMessage = (event) => {
-        const iframe = this.template.querySelector(
-            '[data-id="pdf-frame"]'
-        );
-
-        if (!iframe || event.source !== iframe.contentWindow) {
-            return;
-        }
-
-        let iframeOrigin;
-
-        try {
-            iframeOrigin = new URL(
-                iframe.src,
-                window.location.origin
-            ).origin;
-        } catch {
-            return;
-        }
-
-        if (event.origin !== iframeOrigin) {
-            return;
-        }
-
-        if (event.data?.type !== 'pdf-viewer-ready') {
-            return;
-        }
-
-        this.viewerReady = true;
-        this.tryDeliverPdf();
-    };
-
-    tryDeliverPdf() {
-        // Either side (the iframe or the Apex callout) may still be in
-        // flight - that's not an error, just not ready to deliver yet.
-        if (!this.viewerReady || !this.documentBase64) {
-            return;
-        }
-
-        const iframe = this.template.querySelector(
-            '[data-id="pdf-frame"]'
-        );
-
-        if (!iframe) {
-            return;
-        }
-
-        let iframeOrigin;
-
-        try {
-            iframeOrigin = new URL(
-                iframe.src,
-                window.location.origin
-            ).origin;
-        } catch {
-            this.isLoadingPdf = false;
-            this.pdfError = true;
-            return;
-        }
-
-        const cleanBase64 = this.documentBase64
-            .replace(/^data:application\/pdf;base64,/, '')
-            .replace(/\s/g, '');
-
-        try {
-            iframe.contentWindow.postMessage(
-                {
-                    type: 'load-pdf',
-                    data: cleanBase64
-                },
-                iframeOrigin
-            );
-
-            this.isLoadingPdf = false;
-        } catch {
-            this.isLoadingPdf = false;
-            this.pdfError = true;
-        }
+    handleIframeLoad() {
+        this.isLoadingPdf = false;
     }
 
     closeResumeModal() {
@@ -287,11 +177,6 @@ export default class Navbar extends LightningElement {
     };
 
     disconnectedCallback() {
-        window.removeEventListener(
-            'message',
-            this.handlePdfViewerMessage
-        );
-
         window.removeEventListener(
             'keydown',
             this.handleEscape

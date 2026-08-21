@@ -47,7 +47,7 @@
                     </div>
                 </div>
 
-                <!-- Body: Isolated PDF.js Static Resource Iframe -->
+                <!-- Body: direct native browser PDF rendering, no custom viewer needed -->
                 <div class="resume-modal-body">
                     <template if:true={isLoadingPdf}>
                         <div class="resume-status">
@@ -55,20 +55,9 @@
                         </div>
                     </template>
 
-                    <template if:true={pdfError}>
-                        <div class="resume-status">
-                            <p class="resume-error-text">
-                                Couldn't load the preview. Try the Download button above instead.
-                            </p>
-                        </div>
-                    </template>
-
-                    <!-- The static resource iframe -->
-                    <template if:false={pdfError}>
-                        <iframe class="document-frame" data-id="pdf-frame" allowfullscreen="true"
-                            webkitallowfullscreen="true" src={pdfViewerUrl} title="Resume PDF Preview">
-                        </iframe>
-                    </template>
+                    <iframe class="document-frame" src={rawResumeUrl} title="Resume PDF Preview"
+                        onload={handleIframeLoad}>
+                    </iframe>
                 </div>
 
             </div>

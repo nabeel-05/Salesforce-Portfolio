@@ -101,7 +101,7 @@
 
 .contact-container {
     width: 100%;
-    max-width: 1100px;
+    max-width: 950px;
     margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
