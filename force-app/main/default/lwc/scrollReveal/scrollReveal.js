@@ -7,8 +7,6 @@ const VISIBILITY_THRESHOLD = 0.12;
 export default class ScrollReveal extends LightningElement {
     @api delayIndex = 0;
 
-    hasRevealed = false;
-
     _initialized = false;
     _revealEl;
     _observer;
@@ -65,14 +63,15 @@ export default class ScrollReveal extends LightningElement {
         try {
             this._observer = new IntersectionObserver(
                 (entries) => {
-                    const visible = entries.some(
-                        (entry) =>
-                            entry.isIntersecting &&
-                            entry.intersectionRatio >= VISIBILITY_THRESHOLD
-                    );
+                    const entry = entries[0];
+                    const visible =
+                        entry.isIntersecting &&
+                        entry.intersectionRatio >= VISIBILITY_THRESHOLD;
 
                     if (visible) {
                         this.reveal();
+                    } else {
+                        this.hide();
                     }
                 },
                 {
@@ -110,7 +109,7 @@ export default class ScrollReveal extends LightningElement {
     }
 
     scheduleVisibilityCheck() {
-        if (this.hasRevealed || this._rafId) {
+        if (this._rafId) {
             return;
         }
 
@@ -121,11 +120,7 @@ export default class ScrollReveal extends LightningElement {
     }
 
     checkVisibility() {
-        if (
-            this.hasRevealed ||
-            !this._revealEl ||
-            this._isChecking
-        ) {
+        if (!this._revealEl || this._isChecking) {
             return;
         }
 
@@ -151,18 +146,23 @@ export default class ScrollReveal extends LightningElement {
 
         if (isVisible) {
             this.reveal();
+        } else {
+            this.hide();
         }
     }
 
     reveal() {
-        if (this.hasRevealed || !this._revealEl) {
+        if (!this._revealEl) {
             return;
         }
-
-        this.hasRevealed = true;
         this._revealEl.classList.add('active');
+    }
 
-        this.cleanup();
+    hide() {
+        if (!this._revealEl) {
+            return;
+        }
+        this._revealEl.classList.remove('active');
     }
 
     cleanup() {
