@@ -1,58 +1,198 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, api } from 'lwc';
+
+const STAGGER_STEP = 0.08;
+const STAGGER_CAP = 4;
+const VISIBILITY_THRESHOLD = 0.12;
 
 export default class ScrollReveal extends LightningElement {
-    observer;
+    @api delayIndex = 0;
+
+    hasRevealed = false;
+
+    _initialized = false;
+    _revealEl;
+    _observer;
+    _resizeObserver;
+    _scrollHandler;
+    _resizeHandler;
+    _rafId;
+    _isChecking = false;
 
     renderedCallback() {
-        const revealElements = this.template.querySelectorAll('.reveal');
-
-        if (!revealElements.length) {
+        if (this._initialized) {
             return;
         }
 
-        revealElements.forEach((el, index) => {
-            const delay = (index % 4) * 0.12;
-            el.style.transitionDelay = `${delay}s`;
-        });
+        this._initialized = true;
 
-        if (!('IntersectionObserver' in window)) {
-            revealElements.forEach(el => el.classList.add('active'));
-            return;
-        }
-
-        if (this.observer) {
-            return;
-        }
-
-        this.observer = new IntersectionObserver(
-            entries => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting || entry.boundingClientRect.top < window.innerHeight) {
-                        entry.target.classList.add('active');
-                        this.observer.unobserve(entry.target);
-                    }
-                });
-            },
-            {
-                threshold: 0.1,
-                rootMargin: '0px 0px -50px 0px'
-            }
-        );
-
-        revealElements.forEach(element => {
-            this.observer.observe(element);
-            
-            const rect = element.getBoundingClientRect();
-            if (rect.top < window.innerHeight) {
-                element.classList.add('active');
-                this.observer.unobserve(element);
-            }
+        requestAnimationFrame(() => {
+            this.setup();
         });
     }
 
-    disconnectedCallback() {
-        if (this.observer) {
-            this.observer.disconnect();
+    setup() {
+        const element = this.template.querySelector('.reveal');
+
+        if (!element) {
+            return;
         }
+
+        this._revealEl = element;
+
+        const index = Number(this.delayIndex) || 0;
+        const variant = index % 4;
+        const delay = (index % STAGGER_CAP) * STAGGER_STEP;
+
+        element.dataset.variant = variant;
+        element.style.setProperty('--reveal-delay', `${delay}s`);
+
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            this.reveal();
+            return;
+        }
+
+        this.setupIntersectionObserver();
+        this.setupFallbackListeners();
+
+        this.checkVisibility();
+    }
+
+    setupIntersectionObserver() {
+        if (!('IntersectionObserver' in window)) {
+            return;
+        }
+
+        try {
+            this._observer = new IntersectionObserver(
+                (entries) => {
+                    const visible = entries.some(
+                        (entry) =>
+                            entry.isIntersecting &&
+                            entry.intersectionRatio >= VISIBILITY_THRESHOLD
+                    );
+
+                    if (visible) {
+                        this.reveal();
+                    }
+                },
+                {
+                    root: null,
+                    rootMargin: '0px 0px -8% 0px',
+                    threshold: [0, VISIBILITY_THRESHOLD]
+                }
+            );
+
+            this._observer.observe(this._revealEl);
+        } catch (error) {
+            this._observer = undefined;
+        }
+    }
+
+    setupFallbackListeners() {
+        this._scrollHandler = () => this.scheduleVisibilityCheck();
+        this._resizeHandler = () => this.scheduleVisibilityCheck();
+
+        window.addEventListener('scroll', this._scrollHandler, {
+            passive: true
+        });
+
+        window.addEventListener('resize', this._resizeHandler, {
+            passive: true
+        });
+
+        if ('ResizeObserver' in window) {
+            this._resizeObserver = new ResizeObserver(() => {
+                this.scheduleVisibilityCheck();
+            });
+
+            this._resizeObserver.observe(this._revealEl);
+        }
+    }
+
+    scheduleVisibilityCheck() {
+        if (this.hasRevealed || this._rafId) {
+            return;
+        }
+
+        this._rafId = requestAnimationFrame(() => {
+            this._rafId = undefined;
+            this.checkVisibility();
+        });
+    }
+
+    checkVisibility() {
+        if (
+            this.hasRevealed ||
+            !this._revealEl ||
+            this._isChecking
+        ) {
+            return;
+        }
+
+        this._isChecking = true;
+
+        const rect = this._revealEl.getBoundingClientRect();
+        const viewportHeight =
+            window.innerHeight ||
+            document.documentElement.clientHeight;
+
+        const visibleHeight = Math.min(
+            rect.bottom,
+            viewportHeight
+        ) - Math.max(rect.top, 0);
+
+        const intersectionHeight = Math.max(0, visibleHeight);
+
+        const isVisible =
+            intersectionHeight >= rect.height * VISIBILITY_THRESHOLD ||
+            (rect.top >= 0 && rect.top <= viewportHeight * 0.92);
+
+        this._isChecking = false;
+
+        if (isVisible) {
+            this.reveal();
+        }
+    }
+
+    reveal() {
+        if (this.hasRevealed || !this._revealEl) {
+            return;
+        }
+
+        this.hasRevealed = true;
+        this._revealEl.classList.add('active');
+
+        this.cleanup();
+    }
+
+    cleanup() {
+        if (this._observer) {
+            this._observer.disconnect();
+            this._observer = undefined;
+        }
+
+        if (this._resizeObserver) {
+            this._resizeObserver.disconnect();
+            this._resizeObserver = undefined;
+        }
+
+        if (this._scrollHandler) {
+            window.removeEventListener('scroll', this._scrollHandler);
+            this._scrollHandler = undefined;
+        }
+
+        if (this._resizeHandler) {
+            window.removeEventListener('resize', this._resizeHandler);
+            this._resizeHandler = undefined;
+        }
+
+        if (this._rafId) {
+            cancelAnimationFrame(this._rafId);
+            this._rafId = undefined;
+        }
+    }
+
+    disconnectedCallback() {
+        this.cleanup();
     }
 }

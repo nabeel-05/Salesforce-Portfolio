@@ -1,28 +1,105 @@
-* {
-    box-sizing: border-box;
-}
-
 :host {
     display: block;
+    width: 100%;
 }
 
 .reveal {
+    --reveal-delay: 0s;
+
+    display: block;
+    width: 100%;
+
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-    will-change: opacity, transform;
+
+    transform:
+        translate3d(0, 34px, 0)
+        scale(0.985);
+
+    filter: blur(8px);
+
+    transition:
+        opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+        transform 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+        filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+
+    transition-delay: var(--reveal-delay);
 }
+
+
+/* ─────────────────────────────────────────
+   VARIANT 0 — Soft Rise
+   ───────────────────────────────────────── */
+
+.reveal[data-variant="0"] {
+    transform:
+        translate3d(0, 34px, 0)
+        scale(0.985);
+}
+
+
+/* ─────────────────────────────────────────
+   VARIANT 1 — Lateral Drift
+   ───────────────────────────────────────── */
+
+.reveal[data-variant="1"] {
+    transform:
+        translate3d(-42px, 12px, 0)
+        scale(0.99);
+}
+
+
+/* ─────────────────────────────────────────
+   VARIANT 2 — Depth
+   ───────────────────────────────────────── */
+
+.reveal[data-variant="2"] {
+    transform:
+        translate3d(0, 24px, 0)
+        scale(0.96);
+}
+
+
+/* ─────────────────────────────────────────
+   VARIANT 3 — Floating Tilt
+   ───────────────────────────────────────── */
+
+.reveal[data-variant="3"] {
+    transform:
+        translate3d(30px, 22px, 0)
+        scale(0.985)
+        rotate(0.7deg);
+}
+
+
+/* ─────────────────────────────────────────
+   Revealed State
+   ───────────────────────────────────────── */
 
 .reveal.active {
     opacity: 1;
-    transform: translateY(0);
+
+    transform:
+        translate3d(0, 0, 0)
+        scale(1)
+        rotate(0);
+
+    filter: blur(0);
 }
 
+
+/* ─────────────────────────────────────────
+   Reduced Motion
+   ───────────────────────────────────────── */
+
 @media (prefers-reduced-motion: reduce) {
-    .reveal {
-        opacity: 1 !important;
-        transform: none !important;
-        transition: none !important;
+    .reveal,
+    .reveal[data-variant="0"],
+    .reveal[data-variant="1"],
+    .reveal[data-variant="2"],
+    .reveal[data-variant="3"] {
+        opacity: 1;
+        transform: none;
+        filter: none;
+        transition: none;
     }
 }

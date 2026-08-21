@@ -65,20 +65,38 @@
     align-items: center;
     justify-content: center;
     padding: 14px 32px;
+    border: 1px solid rgba(96, 165, 250, 0.25);
     border-radius: 999px;
+
     color: #ffffff !important;
-    text-decoration: none;
     background: linear-gradient(135deg, #3b82f6, #7c3aed);
+
+    font-family: inherit;
     font-size: 14px;
     font-weight: 600;
     letter-spacing: 0.5px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    box-shadow: 0 4px 14px rgba(59, 130, 246, 0.2);
+
+    text-decoration: none !important;
+    cursor: pointer;
+
+    box-shadow: 0 4px 16px rgba(59, 130, 246, 0.22);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
 }
 
 .email-btn:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 28px rgba(59, 130, 246, 0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 7px 24px rgba(59, 130, 246, 0.32);
+    filter: brightness(1.08);
+    text-decoration: none !important;
+}
+
+.email-btn:active {
+    transform: translateY(0);
+    text-decoration: none !important;
 }
 
 .contact-container {

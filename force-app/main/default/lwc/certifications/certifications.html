@@ -1,60 +1,91 @@
 <template>
     <c-scroll-reveal>
         <section class="certifications" id="certifications">
-            <div class="section-heading">
-                <span class="eyebrow">
-                    CREDENTIALS
-                </span>
 
-                <h2 class="title">
-                    Certifications & <span>Achievements</span>
-                </h2>
-            </div>
+            <template if:false={showCertificate}>
+                <div class="section-heading">
+                    <span class="eyebrow">
+                        CREDENTIALS
+                    </span>
 
-            <div class="cert-grid">
-                <article class="cert-card">
-                    <div class="cert-content">
-                        <span class="cert-type">
-                            TRAINING
-                        </span>
+                    <h2 class="title">
+                        Certifications & <span>Achievements</span>
+                    </h2>
+                </div>
 
-                        <h3>
+                <div class="cert-grid">
+                    <article class="cert-card">
+                        <div class="cert-content">
+                            <span class="cert-type">
+                                TRAINING
+                            </span>
+
+                            <h3>
+                                Salesforce Admin & Developer Training Certificate
+                            </h3>
+
+                            <p>
+                                Completed intensive Salesforce Admin & Developer Training at Cloud IgnitEd.
+                            </p>
+
+                            <button type="button" class="cert-link" onclick={handleViewCertificate}>
+                                View Certificate
+                            </button>
+                        </div>
+                    </article>
+
+                    <article class="cert-card">
+                        <div class="cert-content">
+                            <span class="cert-type">
+                                TRAILHEAD
+                            </span>
+
+                            <h3>
+                                Trailhead Adventurer
+                            </h3>
+
+                            <p>
+                                Achieved the Adventurer rank on Trailhead through hands-on Salesforce learning and
+                                practical
+                                platform challenges.
+                            </p>
+
+                            <a href="https://www.salesforce.com/trailblazer/nabeel05/" target="_blank"
+                                rel="noopener noreferrer" class="cert-link">
+                                View Trailhead Profile
+                            </a>
+                        </div>
+                    </article>
+                </div>
+            </template>
+
+            <template if:true={showCertificate}>
+                <div class="certificate-preview">
+
+                    <div class="preview-header">
+                        <button type="button" class="back-button" onclick={handleBack}>
+                            ← Back
+                        </button>
+
+                        <span class="preview-title">
                             Salesforce Admin & Developer Training Certificate
-                        </h3>
-
-                        <p>
-                            Completed intensive Salesforce Admin & Developer Training at Cloud IgnitEd.
-                        </p>
-
-                        <a href="https://drive.google.com/file/d/1TI-l34uMIXRdDwlrl4mqe3gWvd19EZDx" target="_blank"
-                            rel="noopener noreferrer" class="cert-link">
-                            View Certificate
-                        </a>
-                    </div>
-                </article>
-
-                <article class="cert-card">
-                    <div class="cert-content">
-                        <span class="cert-type">
-                            TRAILHEAD
                         </span>
-
-                        <h3>
-                            Trailhead Adventurer
-                        </h3>
-
-                        <p>
-                            Achieved the Adventurer rank on Trailhead through hands-on Salesforce learning and practical
-                            platform challenges.
-                        </p>
-
-                        <a href="https://www.salesforce.com/trailblazer/nabeel05/" target="_blank"
-                            rel="noopener noreferrer" class="cert-link">
-                            View Trailhead Profile
-                        </a>
                     </div>
-                </article>
-            </div>
+
+                    <div class="preview-content">
+                        <template if:true={isLoadingImage}>
+                            <div class="cert-status">
+                                <div class="spinner"></div>
+                            </div>
+                        </template>
+
+                        <img src={certificateUrl} alt="Salesforce Admin & Developer Training Certificate"
+                            class={imageClass} onload={handleImageLoad} onerror={handleImageLoad} />
+                    </div>
+
+                </div>
+            </template>
+
         </section>
     </c-scroll-reveal>
 </template>

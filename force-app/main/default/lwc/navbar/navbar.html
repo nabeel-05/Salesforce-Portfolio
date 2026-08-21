@@ -1,47 +1,77 @@
 <template>
     <header class="navbar">
         <div class="nav-container">
-            <a href="#home" class="logo" onclick={closeMenu}>
-                N<span class="dot">.</span>
-            </a>
+            <a href="#home" class="logo" onclick={closeMenu}>N<span class="dot">.</span></a>
 
             <nav class={navLinksClass}>
-                <button class={aboutClass} type="button" data-section="about" onclick={handleNavigation}>
-                    About
-                </button>
-
-                <button class={skillsClass} type="button" data-section="skills" onclick={handleNavigation}>
-                    Skills
-                </button>
-
-                <button class={projectsClass} type="button" data-section="projects" onclick={handleNavigation}>
-                    Projects
-                </button>
+                <button class={aboutClass} type="button" data-section="about" onclick={handleNavigation}>About</button>
+                <button class={skillsClass} type="button" data-section="skills"
+                    onclick={handleNavigation}>Skills</button>
+                <button class={projectsClass} type="button" data-section="projects"
+                    onclick={handleNavigation}>Projects</button>
                 <button class={certificationsClass} type="button" data-section="certifications"
-                    onclick={handleNavigation}>
-                    Certifications
-                </button>
-
-                <button class={experienceClass} type="button" data-section="experience" onclick={handleNavigation}>
-                    Experience
-                </button>
-
-                <button class={contactClass} type="button" data-section="contact" onclick={handleNavigation}>
-                    Contact
-                </button>
+                    onclick={handleNavigation}>Certifications</button>
+                <button class={experienceClass} type="button" data-section="experience"
+                    onclick={handleNavigation}>Experience</button>
+                <button class={contactClass} type="button" data-section="contact"
+                    onclick={handleNavigation}>Contact</button>
             </nav>
 
             <div class="nav-actions">
-                <a href="" target="_blank" class="resume-btn" rel="noopener noreferrer">
-                    Resume
-                </a>
-
-                <button class={hamburgerClass} onclick={toggleMenu} aria-label="Toggle navigation menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+                <button class="resume-btn" type="button" onclick={openResume}>Resume</button>
             </div>
+
+            <button class={hamburgerClass} type="button" onclick={toggleMenu} aria-label="Toggle navigation menu">
+                <span></span><span></span><span></span>
+            </button>
         </div>
     </header>
+
+    <!-- Resume Modal -->
+    <template if:true={showResumeModal}>
+        <div class="resume-modal-backdrop" onclick={closeResumeModal}>
+            <div class="resume-modal" role="dialog" aria-modal="true" onclick={stopPropagation}>
+
+                <!-- Header -->
+                <button class="back-btn" type="button" onclick={closeResumeModal}>
+                    <span class="back-arrow">←</span>Back
+                </button>
+                <div class="resume-modal-header">
+                    <span class="modal-title">Resume</span>
+
+                    <div class="resume-modal-actions">
+                        <a href={rawResumeUrl} download={resumeFileName} class="download-btn" target="_blank"
+                            rel="noopener noreferrer">
+                            Download
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Body: Isolated PDF.js Static Resource Iframe -->
+                <div class="resume-modal-body">
+                    <template if:true={isLoadingPdf}>
+                        <div class="resume-status">
+                            <div class="spinner"></div>
+                        </div>
+                    </template>
+
+                    <template if:true={pdfError}>
+                        <div class="resume-status">
+                            <p class="resume-error-text">
+                                Couldn't load the preview. Try the Download button above instead.
+                            </p>
+                        </div>
+                    </template>
+
+                    <!-- The static resource iframe -->
+                    <template if:false={pdfError}>
+                        <iframe class="document-frame" data-id="pdf-frame" allowfullscreen="true"
+                            webkitallowfullscreen="true" src={pdfViewerUrl} title="Resume PDF Preview">
+                        </iframe>
+                    </template>
+                </div>
+
+            </div>
+        </div>
+    </template>
 </template>
