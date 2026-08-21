@@ -29,9 +29,16 @@
     font-size: 24px;
     font-weight: 800;
     color: #f8fafc;
-    text-decoration: none;
+    text-decoration: none !important;
     letter-spacing: -0.5px;
-    flex-shrink: 0;
+    user-select: none;
+    outline: none;
+}
+.logo :hover{
+        text-decoration: none !important;
+}
+.logo :active{
+        text-decoration: none !important;
 }
 
 .dot { color: #3b82f6; }
@@ -300,9 +307,10 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-
+    text-decoration: none !important;
+    
     padding: 7px 15px;
-
+    
     border: 1px solid rgba(96, 165, 250, 0.25);
     border-radius: 999px;
 
@@ -313,21 +321,20 @@
     );
 
     color: #ffffff !important;
-
+    
     font-family: inherit;
     font-size: 12px;
     font-weight: 600;
-    text-decoration: none;
-
+    
     cursor: pointer;
-
+    
     box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
-
+    
     transition:
-        transform 0.25s ease,
+    transform 0.25s ease,
         box-shadow 0.25s ease,
         filter 0.25s ease;
-}
+    }
 
 .download-btn:hover {
     transform: translateY(-1px);
@@ -335,11 +342,12 @@
     box-shadow: 0 7px 20px rgba(59, 130, 246, 0.35);
 
     filter: brightness(1.08);
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 .download-btn:active {
     transform: translateY(0);
+    text-decoration: none !important;
 }
 
 /* PDF AREA */

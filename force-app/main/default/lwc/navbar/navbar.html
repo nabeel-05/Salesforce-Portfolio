@@ -1,8 +1,9 @@
 <template>
     <header class="navbar">
         <div class="nav-container">
-            <a href="#home" class="logo" onclick={closeMenu}>N<span class="dot">.</span></a>
-
+            <a href="#" class="logo" onclick={handleLogoClick}>
+                N<span class="dot">.</span>
+            </a>
             <nav class={navLinksClass}>
                 <button class={aboutClass} type="button" data-section="about" onclick={handleNavigation}>About</button>
                 <button class={skillsClass} type="button" data-section="skills"
@@ -27,18 +28,16 @@
         </div>
     </header>
 
-    <!-- Resume Modal -->
     <template if:true={showResumeModal}>
         <div class="resume-modal-backdrop" onclick={closeResumeModal}>
             <div class="resume-modal" role="dialog" aria-modal="true" onclick={stopPropagation}>
 
-                <!-- Header -->
                 <button class="back-btn" type="button" onclick={closeResumeModal}>
                     <span class="back-arrow">←</span>Back
                 </button>
+
                 <div class="resume-modal-header">
                     <span class="modal-title">Resume</span>
-
                     <div class="resume-modal-actions">
                         <a href={rawResumeUrl} download={resumeFileName} class="download-btn" target="_blank"
                             rel="noopener noreferrer">
@@ -47,17 +46,13 @@
                     </div>
                 </div>
 
-                <!-- Body: direct native browser PDF rendering, no custom viewer needed -->
                 <div class="resume-modal-body">
                     <template if:true={isLoadingPdf}>
                         <div class="resume-status">
                             <div class="spinner"></div>
                         </div>
                     </template>
-
-                    <iframe class="document-frame" src={rawResumeUrl} title="Resume PDF Preview"
-                        onload={handleIframeLoad}>
-                    </iframe>
+                    <iframe class="document-frame" src={pdfViewerUrl} title="Resume PDF Preview"></iframe>
                 </div>
 
             </div>
