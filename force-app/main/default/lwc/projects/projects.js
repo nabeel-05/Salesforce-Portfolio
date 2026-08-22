@@ -3,9 +3,9 @@ import { LightningElement } from 'lwc';
 export default class Projects extends LightningElement {
     projects = [
     {
-        id: 'salesforce-smart-scheduler',
+        id: 'smart-scheduler',
         category: 'Salesforce • React & Apex',
-        title: 'Salesforce Smart Scheduler',
+        title: 'Smart Scheduler',
         description: 'Dynamic scheduling platform with a React frontend and Salesforce backend for appointment management, availability tracking, conflict prevention, and Google Calendar synchronization.',
         technologies: [
             'React',
@@ -17,9 +17,9 @@ export default class Projects extends LightningElement {
         demo: 'YOUR_LIVE_DEMO_LINK'
     },
     {
-        id: 'salesforce-dynamic-form-builder',
+        id: 'dynamic-form-builder',
         category: 'Salesforce • LWC',
-        title: 'Salesforce Dynamic Form Builder',
+        title: 'Dynamic Form Builder',
         description: 'Metadata-driven form platform for creating dynamic, multi-step application forms with conditional rendering, branching logic, runtime validation, and reusable LWC components.',
         technologies: [
             'LWC',

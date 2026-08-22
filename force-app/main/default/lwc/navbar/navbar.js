@@ -3,7 +3,7 @@ import { getContent } from 'experience/cmsDeliveryApi';
 import siteId from '@salesforce/site/Id';
 import PDFJS_VIEWER from '@salesforce/resourceUrl/pdfjsViewer';
 
-const RESUME_KEY = 'MCPEM3BZKW4NHA7A3JBWF5FKJIXY';
+const RESUME_KEY = 'MCAHJANR2AJ5BGVJERYYQUATY4PA';
 
 export default class Navbar extends LightningElement {
     menuOpen = false;
